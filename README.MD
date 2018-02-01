@@ -20,3 +20,13 @@ gradlew buildTinkerPatchRelease / buildTinkerPatchDebug
  这里不需要context对象，可以在Bugly初始化完成后，调用
 2、如何调用差分文件
 Beta.applyTinkerPatch(getApplicationContext(), Environment.getExternalStorageDirectory().getAbsolutePath() + "/patch_signed_7zip.apk");
+
+
+************************************
+###2018-02-01
+ 采用enableProxyApplication = true的方式接入,只需要自己写一个类继承自Application，然后在清单文件内
+ 注册，将bugly的初始调整到这里即可；
+  采用enableProxyApplication = false的方式接入，需要按照官方的demo来测试
+bugly两种介入方式，
+https://bugly.qq.com/docs/user-guide/instruction-manual-android-hotfix/?v=20180119105842
+

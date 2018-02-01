@@ -18,23 +18,29 @@ public class MainActivity extends AppCompatActivity {
 //        System.loadLibrary("native-lib");
 //    }
 
+//    static {
+//        Log.d("Loopher","MainActivity static method call ===================>");
+//        Beta.loadLibrary("native-lib");
+//    }
+
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d("Loopher","MainActivity onCreate ==================>");
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.sample_text);
         loadLibrary();
 //        tv.setText(stringFromJNI());
-        tv.setText("update UI  text content  by bugly platform  value = "+sum(10,20));
+        tv.setText("update UI  text content  by bugly platform ， 计算结果：  value = "+sum(10,20));
 //        Log.d("Loopher","adder add() ="+Adder.add(1,12));
         showToast();
     }
 
     private void showToast(){
-        Toast.makeText(getApplicationContext(),"BUGLY HOTFIX succcccccc !"+stringFromJNI() +" "+Adder.add(1,12),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"更新方法 !"+stringFromJNI() +" "+Adder.add(1,12),Toast.LENGTH_SHORT).show();
     }
 
 
