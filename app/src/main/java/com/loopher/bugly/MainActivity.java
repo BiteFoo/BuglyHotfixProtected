@@ -2,6 +2,7 @@ package com.loopher.bugly;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,16 +32,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Log.d("Loopher","MainActivity onCreate ==================>");
         // Example of a call to a native method
-        TextView tv = (TextView) findViewById(R.id.sample_text);
         loadLibrary();
+        TextView tv = (TextView) findViewById(R.id.sample_text);
 //        tv.setText(stringFromJNI());
         tv.setText("update UI  text content  by bugly platform ， 计算结果：  value = "+sum(10,20));
 //        Log.d("Loopher","adder add() ="+Adder.add(1,12));
         showToast();
+        setContext(getApplicationContext());
     }
 
     private void showToast(){
-        Toast.makeText(getApplicationContext(),"更新方法 !"+stringFromJNI() +" "+Adder.add(1,12),Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"这是一个热更新的提示 !"+stringFromJNI() +" "+Adder.add(1,12),Toast.LENGTH_SHORT).show();
     }
 
 
@@ -62,4 +64,7 @@ public class MainActivity extends AppCompatActivity {
     public native String stringFromJNI();
 
     public native  int sum(int a,int b);
+
+    public native void setContext(Context context);
+
 }

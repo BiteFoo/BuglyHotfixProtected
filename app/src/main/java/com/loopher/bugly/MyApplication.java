@@ -82,7 +82,7 @@ public class MyApplication extends Application {
 
 //        Bugly.init(this, "900029763", false);
         Log.d("Loopher","=============>>> MyApplication onCreate  ");
-//        NativeHelper.loadLibrary(this);
+
     }
 
     @Override
@@ -93,5 +93,6 @@ public class MyApplication extends Application {
         // 安装tinker
         Beta.installTinker();
         Log.d("Loopher","=============>>> MyApplication attachBaseContext ");
+//        NativeHelper.loadLibrary(base);
     }
 }

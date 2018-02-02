@@ -34,9 +34,12 @@ public class NativeHelper {
     }
     public static void loadLibrary(Context context)
     {
+//        System.loadLibrary("native-lib");
+
         if("x86".equals(getArch()))
         {
             Log.d("Loopher","=========load x86========>");
+            System.loadLibrary("native-lib");
             Beta.loadLibraryFromTinker(context,"lib/x86","native-lib");//加载x86
         }
         else

@@ -1,23 +1,38 @@
 #include <jni.h>
 #include <string>
-
-
-
 #include <android/log.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include "./include/checksign.h"
+#include "check-sign.cpp"
 
-#define LOG_TAG "ThomasKing"
-#define LOGD(fmt, args...) __android_log_print(ANDROID_LOG_DEBUG, LOG_TAG, fmt, ##args)
-
+//------------------------------------------------------
 static int native_sum(int a,int b)
 {
     return a+b;
 }
 
+
+
 static jstring getString(JNIEnv *env, jobject obj){
     return (env) -> NewStringUTF( "Native String Return");
+}
+
+static void native_setContext(JNIEnv* env,jobject context)
+{
+    if(context !=NULL)
+    {
+
+        LOGD("--------------->> ");
+//        jobject  sysContext = getSystemContextByActityThread(env);
+//        if(context == sysContext)
+//        {
+//            LOGD("[+] equal ");
+//        } else{
+//            LOGE("[-]  not equal  ===>> ");
+//        }
+    }
 }
 
 // com.loopher.bugly
@@ -25,7 +40,8 @@ static jstring getString(JNIEnv *env, jobject obj){
 
 static JNINativeMethod gMethods[] = {
         {"stringFromJNI", "()Ljava/lang/String;", (void*)getString},
-        {"sum","(II)I",(void*) native_sum}
+        {"sum","(II)I",(void*) native_sum},
+        {"setContext","(Landroid/content/Context;)V",(void*)native_setContext}
 
 };
 
@@ -54,13 +70,20 @@ static int registerNatives(JNIEnv* env)
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
 {
+    //
     JNIEnv* env = NULL;
+
     if ((vm)->GetEnv( (void**) &env, JNI_VERSION_1_4) != JNI_OK) {
         return -1;
     }
+
     LOGD("JNI_OnLoad ------------->");
     if(env == NULL)
         return -1;
+//    getContext(env);
+    getSystemContextByActityThread(env); //获取到系统的context
+//    getGlobalContext(env);
+//    obtainContextByPackName(env,"com.loopher.bugly");
     if (!registerNatives(env)) {
         return -1;
     }
